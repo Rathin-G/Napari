@@ -87,7 +87,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Napari - An multidimensional image viewer</h1>
+          <h1 class="title is-1 publication-title">Napari - A multidimensional image viewer</h1>
           <!--
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -321,7 +321,7 @@
           </ul>
             There are many other ways to install napari
             mentioned in the official guide below:
-             <a href="https://napari.org/stable/tutorials/fundamentals/installation.html">https://napari.org/stable/tutorials/fundamentals/installation.html</a>
+             <a href="https://napari.org/stable/tutorials/fundamentals/installation.html">Here</a>
           <h3>Running napari for the first time</h3>
           We will be showing how to run it on a Jupyter Notebook.<br>
           We can run the following code the first start napari.
@@ -334,7 +334,7 @@ import napari
 viewer, image_layer = napari.imshow(cells3d())</code></pre><br>
 <p>
 To run it in a normal python script you need to add: <pre><code class="language-python"> napari.run() </code></pre>
-Here is a short explaination for what the above code is doing.The <a href="https://www.bing.com/ck/a?!&&p=3cfe88d90ee6033811493a30ee021e1fec2c169fc83402b02fb215554e878b8cJmltdHM9MTc0MDA5NjAwMA&ptn=3&ver=2&hsh=4&fclid=2085a650-f9b4-601c-183b-b2bcf8066172&psq=what+is+skimage&u=a1aHR0cHM6Ly9zY2lraXQtaW1hZ2Uub3JnL2RvY3Mvc3RhYmxlL2FwaS9za2ltYWdlLmh0bWw&ntb=1">skimage</a>
+Here is a short explaination for what the above code is doing.The <a href="https://www.bing.com/ck/a?!&&p=3cfe88d90ee6033811493a30ee021e1fec2c169fc83402b02fb215554e878b8cJmltdHM9MTc0MDA5NjAwMA&ptn=3&ver=2&hsh=4&fclid=2085a650-f9b4-601c-183b-b2bcf8066172&psq=what+is+skimage&u=a1aHR0cHM6Ly9zY2lraXQtaW1hZ2Uub3JnL2RvY3Mvc3RhYmxlL2FwaS9za2ltYWdlLmh0bWw&ntb=1">Here</a>
 is an image processing tool in python. However, over her we have used it to only tkae some data.The "Viewer" is the napari viewer's GUI. "Image" refers to the image that we are showing which in this case is cells3d. For example
 Your window may look something like this: A Napari viewer open with cell3d image loaded in it. An advantage of using jupyter notebook or Ipython is you you can dynamically interact wil the viewer with code, i.e making changes code will change the viewer.
 <br>
@@ -343,7 +343,7 @@ Your window may look something like this: A Napari viewer open with cell3d image
 <img src="./static/images/Napari-setup.png">
   </p>
         <p>
-         Links to FAQ's regarding installation and setup: <a href="https://napari.org/stable/tutorials/fundamentals/getting_started.html#solving-common-problems">https://napari.org/stable/tutorials/fundamentals/getting_started.html#solving-common-problems</a>
+         Links to FAQ's regarding installation and setup: <a href="https://napari.org/stable/tutorials/fundamentals/getting_started.html#solving-common-problems">Here</a>
         </p> 
     <!-- Paper video. -->
      <!--
@@ -360,7 +360,60 @@ Your window may look something like this: A Napari viewer open with cell3d image
     <!--/ Paper video. -->
   </div>
 </section>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <!-- Introduction -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Key Features & Explainantion</h2>
+        <div class="content has-text-justified">
+          <h3>Multidimensional Viewing</h3>
+          Watch the below video to see how multidimensional images can be viewed using sliders 
+          in the napari viewer
+            <!--
+          <p>
+            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
+            photos/videos into deformable NeRF
+            models that allow for photorealistic renderings of the subject from arbitrary
+            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
+            using a
+            rig with two mobile phones that take time-synchronized photos, yielding train/validation
+            images of the same pose at different viewpoints. We show that our method faithfully
+            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
+            fidelity.
+          </p>
+          -->
+        </div>
+      </div>
+    </div>
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/Napari-Ndimensional.mp4"
+                type="video/mp4">
+      </video>
+      <div class="container is-max-desktop">
+        <!-- Introduction -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified"><br>
+              <h3>Interactive Image Viewing</h3>
+              <p>
+              In the video below we can see how easily we change the color maps , set constrast limits
+              . We can also easily annotate the video using the various LAYERS present 
+              Napari viewer
+              </p>
 
+    </div>
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/Napari-Ndimensional.mp4"
+                  type="video/mp4">
+        </video>
+    </div>
+  </div>
+</section>
 
 <!--
 <section class="section">
