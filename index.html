@@ -365,7 +365,7 @@ Your window may look something like this: A Napari viewer open with cell3d image
     <!-- Introduction -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Key Features & Explainantion</h2>
+        <h2 class="title is-3">Key Features & Explaination</h2>
         <div class="content has-text-justified">
           <h3>Multidimensional Viewing</h3>
           Watch the below video to see how multidimensional images can be viewed using sliders 
@@ -392,6 +392,12 @@ Your window may look something like this: A Napari viewer open with cell3d image
         <source src="./static/videos/Napari-Ndimensional.mp4"
                 type="video/mp4">
       </video>
+      <p>
+        The above image is a 4D array - hence 2 sliders are present . Each slider
+        corresponds to going traversing through a particular dimension in an array.
+        For every combination of values of the 2 sliders, we have a range for x and y
+        (2D image). This helps to pack a lot related information together.
+      </p>
       <div class="container is-max-desktop">
         <!-- Introduction -->
         <div class="columns is-centered has-text-centered">
@@ -403,19 +409,252 @@ Your window may look something like this: A Napari viewer open with cell3d image
               . We can also easily annotate the video using the various LAYERS present 
               Napari viewer
               </p>
+              <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./static/videos/Napari-Interactive Viewing.mp4"
+                        type="video/mp4">
+                      </video>
+              <p>
+                Notice that while addig the points a new layer "Points" is created.
+                Like adding the points layer allowed us to add points to the image
+                there are many layers like shapes and labels which helps to annotate 
+                the images. Layers are one of the most useful features of napari.
+              </p>
 
-    </div>
-    <div class="container is-max-desktop">
-      <div class="hero-body">
-        <video id="teaser" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/Napari-Ndimensional.mp4"
-                  type="video/mp4">
-        </video>
+              <p>We can also easily zoom , pan,transform the axis and change the order of the axes to be viewed of the image
+                with a simple click </p>
+                <video id="teaser" autoplay muted loop playsinline height="100%">
+                  <source src="./static/videos/Napari - Zoom Pan.mp4"
+                          type="video/mp4">
+                </video>
+                <p>
+                  <div class="container is-max-desktop">
+                    <!-- Introduction -->
+                    <div class="columns is-centered has-text-centered">
+                      <div class="column is-four-fifths">
+                        <div class="content has-text-justified"><br>
+                          <h3> Fast Handling of laarge datasets</h3>
+                  Napari can handle large datasets easily as it does not load the data all at once.
+                  Rather it loads the data as we change the parameters, for example as we change the slides
+                  it loads the data. This helps to process and view large datasets efficiently. It uses <a href="https://docs.dask.org/en/stable/index.html">
+                    Dask
+                  </a> for such large and complex data processing. It "lazily-loads" the data. It also has support for GPU acceleration.
+                This is really helpful as most multi-dimensional files are huge , and viewing them normally requires more computation powers.</p>
+                    </div> 
+                      <div class="container is-max-desktop">
+                        <!-- Introduction -->
+                        <div class="columns is-centered has-text-centered">
+                          <div class="column is-four-fifths">
+                            <div class="content has-text-justified"><br>
+                              <h3>Plugins</h3>
+                              <p> We can install custom plugins for Napari.
+                                These plugins extend the usability for Napari.<br>
+                                </p>
+                                <p>
+                              <img src="./static/images/Napari-Plugins.png">
+                              </p>
+                              div class="container is-max-desktop">
+                              <!-- Introduction -->
+                              <div class="columns is-centered has-text-centered">
+                                <div class="column is-four-fifths">
+                                  <div class="content has-text-justified"><br>
+                                    <h3>Compatibility with other libraries</h3>
+                                    <p> We can use many other scientific computing libraries of python like numpy and scipy
+                                        with napari. </p>
+
     </div>
   </div>
 </section>
+<div class="container is-max-desktop">
+  <!-- Introduction -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <div class="content has-text-justified"><br>
+        <h2>Using Python</h2>
+          <p>Here are some examples on how we can use python to make changes in 
+            napari. Jupyter Notebook is used here.
+          </p>
+          <p>
+            The <code>cells3d</code> image data is being used over here.
+          </p>
+          <p>
+          <h3> Adding points to image</h3>
+          <style> 
+            comment{
+              color:green;
+    font-size: 100%;
+            }
+            import{
+              color:blue;
+              font-size:100%;
+            } 
 
-<!--
+            </style> 
+          <pre><code>          
+          <comment># Adding Points Layer</comment> 
+          <comment>#Random co-ordinates</comment>
+          points=np.random.randint(0,256,size=(10,2))
+    
+          <comment>#addding layer in napari</comment>
+          points_layer = viewer.add_points(points)
+            
+          <comment>#customising</comment>
+          points_layer.face_color='white'
+            </code></pre> 
+         </p>
+         <p>Result</p>
+         <img src="./static/images/Napari-Points.png">
+         <p>What is viewer.layers? It contains the layer in the viewer
+         <pre><code>
+          viewer.layer
+
+          Output:
+        [&lt;Image layer 'Image' at 0x21452e8ccb0>, &lt;Points layer 'Points' at 0x21452f6ad20>, &lt;Points layer 'points' at 0x21458b84a70>]
+</code></pre>
+        <h3>Changing Colormap and changing interpolation mode</h3>
+        <pre><code>
+          <style> 
+            comment{
+              color:green;
+    font-size: 100%;
+            }
+            import{
+              color:blue;
+              font-size:100%;
+            } 
+            </style> 
+    <comment># Setting Colormap to 'viridis'</comment>
+    viewer.layers[0].colormap = 'viridis'
+    <comment>#Changing interpolation mode</comment>
+    viewer.layers[0].interpolation3d='kaiser'
+</code></pre>
+</p>
+<p>Colormap dictates how the numerical values present in the data are converted into a color.
+  Interpolation in a very loose sense helps to changes the sharpness of the image </p>
+<p>
+  Result
+  <img src="./static/images/Napari-colormap_and _interpolation.png">
+</p>
+<p>
+  <h3> Toggling the visibility</h3>
+  We can set the layers to be invisble to work at a single layer at a time
+  <pre><code>
+    <comment>#Turning the visibility off</comment>
+    viewer.layers[1].visible=False
+  </code></pre>
+  <p>Result</p>
+  <img src="./static/images/Napari-toggling_the_visibility.png">
+</p>
+ <h3>Making a polygon / shape</h3>
+ <pre><code>
+  <comment># Add a polygon defined by a list of points
+  # Points are given as (x, y) tuples</comment>
+  polygon = [(179,84), (179,139),(132,139),(132,84)] 
+  <comment> # Four vertices of the polygon</comment>
+ 
+  <comment># Add the polygon shape to the viewer</comment>
+  viewer.add_shapes([polygon], shape_type='polygon', edge_color='green',opacity=0.3)
+ </code></pre>
+ <img src="./static/images/Napari-adding_a_polygon.png">
+ <h3>Viewing 3D object - blobs</h3>
+ <style>
+  text {
+color:violet;
+  }
+  text-green{
+    color:green
+  }
+  text-red{
+    color:red;
+  }
+ </style>
+ code source: <a href="https://napari.org/stable/tutorials/fundamentals/viewer.html#toggle-2d-3d-button">napari website</a>
+ Code:
+ <pre><code>
+  <import>from</import> scipy <import>import</import> ndimage as ndi
+<import>from</import> skimage <import>import</import> data
+
+<import>import</import> napari
+
+blobs = data.<text>binary_blobs</text>(
+        length=<import>128</import>, volume_fraction=<comment>>0.1</comment>, n_dim=<comment>3</comment>
+        )<comment>[::2]</comment>.astype(<text-green>float</text-green>)
+labeled = ndi.label(blobs)[<text-green>0</text-green>]
+
+viewer = napari.<import>Viewer</import>(ndisplay=<import>3</import>)
+viewer.<import>add_image</import>(blobs, name=<text-red>'blobs'</text-red>, scale=<comment>(2, 1, 1)</comment>)
+viewer.<import>add_labels</import>(labeled, name=<text-red>'blob ID'</text-red>, scale=<comment>(2, 1, 1)</comment>)
+ </code></pre>
+ <h4>Result:</h4>
+ <video id="teaser" autoplay muted loop playsinline height="100%">
+  <source src="./static/videos/Napari-Blobs.mp4"
+          type="video/mp4">
+        </video>
+        <p><br><br></p>
+  <h4> If I set ndisplay=2 then:</h4>
+  <video id="teaser" autoplay muted loop playsinline height="100%">
+    <source src="./static/videos/Napari-2D blobs.mp4"
+            type="video/mp4">
+          </video>
+  <p> Here ndisplay sets the no.of dimension of viewing in which the image is to 
+    be opened
+  </p>
+  <p>
+    <br>
+    Explaination of the code:<br>
+    <ul>
+    <li><code>data.binary_blobs</code> creates these blobs.</li>
+    <li><code>length</code> shows thee dimension in this case is 128x128x128.</li>
+    <li><code>volume_fraction</code> determines how much of the cubes is occupied by blobs.</li>
+    <li><code>n_dim represent the number of dimensions.</code>[::2] slices the the generated array.For faster computatioon and generation.
+    </li>
+    <li>This effectively reduces the image size scale by 2 (selects every second element).</li>
+    <li><code>ndi</code> here is used to assign all the "blobs"</li>
+    <li>some label and the number of labels (hence [0] is done).</li>
+    <li><code>viewer.add_label</code> assign colour to every label (creates a 'labels' layer)</li></ul></p>
+  </p><p></p>
+  <h2>Use Cases</h2>
+1. Bioimaging & Microscopy
+Napari is widely used in cell segmentation, fluorescence imaging which includes applying colormaps to say track the movement of nuclei of cells and highlight using labels which cells are of interest. Time-based movement of cells can also be captured.
+<br><br>2. Deep Learning & AI in Imaging
+It is commonly used for training data for AI models. Colormaps again play a big role along with dimensional viewing. There are plugins present for AI as well.
+<br><br>3. Medical Imaging
+Researchers use Napari to visualize MRI, CT, and histological images. They can be highly useful to detect issues say I need to know where the issue is inside someone's lungs, I can use maximum intensity projection to view which aras might be affected. This can be done with things like
+<a href="https://napari.org/stable/tutorials/fundamentals/viewer.html#right-click-menu">this</a>.
+Annotations like points or shapes can be used.<br>
+<p>
+
+</p>
+<img src="./static/images/Napari-max-proj-1.png">
+<p><br></p>
+<h3> Conclusion</h3>
+<p>Overall Napari seems to be a powerful tool for image viewing and its further application.
+  Its uses in the field of microsocopy and biology show this. However, I noticed a that there were minor bugs here and there. 
+  Another thing to note is that the full-power of napari can only utilised when used in collaboration with other python libraries
+  like how scipy was used to label the blobs automatically , whereas if we were to only use napari we would have to do it by hand. 
+
+  Since ,Napari is a open-source tool it continue to be better , with a better library of plugins availbale for use.Its ability to load huge datasets smoothly makes applicable for practical purposes.
+</p>
+<h3>References and further reading</h3>
+<p>
+  <h4>Further Reading:</h4>
+  Using ImageJ with napari: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10591722/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10591722/</a>
+  <br>Use cases listed on website:<a href="https://napari.imagej.net/en/latest/Use_Cases.html">https://napari.imagej.net/en/latest/Use_Cases.html</a>
+  <br>Video on using napari : <a href="https://youtu.be/VXdFOcBCto4?si=njwj8s2G16lvfs_v">https://youtu.be/VXdFOcBCto4?si=njwj8s2G16lvfs_v</a>
+  <br>Official Napari Github: <a href="https://github.com/napari/napari">https://github.com/napari/napari</a></p>
+  <p>
+  <h4>References:</h4>
+  The Video on Napari mentioned above.
+  <br>Official Napari website: <a href="https://napari.org/stable/">"https://napari.org/stable/"</a>
+  <br>HTML:<a href="https://www.w3schools.com/html/">https://www.w3schools.com/html/</a>
+    </p>
+</p>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+<!-- 
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -429,10 +668,7 @@ Your window may look something like this: A Napari viewer open with cell3d image
             Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
             would be impossible without nerfies since it would require going through a wall.
           </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
+
         </div>
       </div>
       -->
