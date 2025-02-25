@@ -268,7 +268,7 @@
         <div class="content has-text-justified">
           <p>
             Napari is an open – source python tool which makes viewing with images easier especially n-dimensional images.
-             It used in many domains especially for scientific purposes. With over 93 functions showcased on its website, it is one of the most versatile image viewers for higher dimension. It also allows plugins to be installed on to extend it its capabilities. It has many options for image viewing , like sliders for viewing 3+ dimensions, changing Colour cmaps ,adjusting contrast etc, with just one click.
+             It used in many domains especially for scientific purposes. With over 93 use cases showcased on its website, it is one of the most versatile image viewers for higher dimension. It also allows plugins to be installed on to extend it its capabilities. It has many options for image viewing , like sliders for viewing 3+ dimensions voltage, changing Colour cmaps ,adjusting contrast etc, with just one click.
              It uses vispy python library to view the image and interact with the image/shapes.
           </p>
           <p>
@@ -325,7 +325,6 @@
           <h3>Running napari for the first time</h3>
           We will be showing how to run it on a Jupyter Notebook.<br>
           We can run the following code the first start napari.
-          # import sample data
 <pre><code class="language-python">from skimage.data import cells3d
 
 import napari
@@ -334,8 +333,8 @@ import napari
 viewer, image_layer = napari.imshow(cells3d())</code></pre><br>
 <p>
 To run it in a normal python script you need to add: <pre><code class="language-python"> napari.run() </code></pre>
-Here is a short explaination for what the above code is doing.The <a href="https://www.bing.com/ck/a?!&&p=3cfe88d90ee6033811493a30ee021e1fec2c169fc83402b02fb215554e878b8cJmltdHM9MTc0MDA5NjAwMA&ptn=3&ver=2&hsh=4&fclid=2085a650-f9b4-601c-183b-b2bcf8066172&psq=what+is+skimage&u=a1aHR0cHM6Ly9zY2lraXQtaW1hZ2Uub3JnL2RvY3Mvc3RhYmxlL2FwaS9za2ltYWdlLmh0bWw&ntb=1">Here</a>
-is an image processing tool in python. However, over her we have used it to only tkae some data.The "Viewer" is the napari viewer's GUI. "Image" refers to the image that we are showing which in this case is cells3d. For example
+Here is a short explaination for what the above code is doing.<a href="https://www.bing.com/ck/a?!&&p=3cfe88d90ee6033811493a30ee021e1fec2c169fc83402b02fb215554e878b8cJmltdHM9MTc0MDA5NjAwMA&ptn=3&ver=2&hsh=4&fclid=2085a650-f9b4-601c-183b-b2bcf8066172&psq=what+is+skimage&u=a1aHR0cHM6Ly9zY2lraXQtaW1hZ2Uub3JnL2RvY3Mvc3RhYmxlL2FwaS9za2ltYWdlLmh0bWw&ntb=1">Here</a>
+is an image processing tool in python. However, over here we have used it to only take some data.The "Viewer" is the napari viewer's GUI. "Image" refers to the image that we are showing which in this case is cells3d. For example
 Your window may look something like this: A Napari viewer open with cell3d image loaded in it. An advantage of using jupyter notebook or Ipython is you you can dynamically interact wil the viewer with code, i.e making changes code will change the viewer.
 <br>
 </p>
@@ -566,10 +565,10 @@ color:violet;
     color:red;
   }
  </style>
- code source: <a href="https://napari.org/stable/tutorials/fundamentals/viewer.html#toggle-2d-3d-button">napari website</a><br>
+ code source: <a href="https://napari.org/stable/tutorials/fundamentals/viewer.html#toggle-2d-3d-button">napari website</a>
  Code:
  <pre><code>
-<import>from</import> scipy <import>import</import> ndimage as ndi
+  <import>from</import> scipy <import>import</import> ndimage as ndi
 <import>from</import> skimage <import>import</import> data
 
 <import>import</import> napari
@@ -610,7 +609,52 @@ viewer.<import>add_labels</import>(labeled, name=<text-red>'blob ID'</text-red>,
     <li><code>ndi</code> here is used to assign all the "blobs"</li>
     <li>some label and the number of labels (hence [0] is done).</li>
     <li><code>viewer.add_label</code> assign colour to every label (creates a 'labels' layer)</li></ul></p>
-  </p><p></p>
+    <h3>Adding labels to image with program</h3>
+    <p>
+      <pre><code class="language-python">
+        from skimage import data
+        from skimage.filters import threshold_otsu
+        from skimage.measure import label
+        from skimage.morphology import remove_small_objects
+        from skimage.segmentation import clear_border
+        
+        import napari
+        
+        image = data.coins()
+        
+        # apply threshold
+        thresh = threshold_otsu(image)
+        bw = image > thresh
+        
+        # remove objects near the image 
+        cleared = remove_small_objects(clear_border(bw))
+        
+        # label the individual images
+        label_image = label(cleared).astype(int)
+        
+        # start the viewer and rgb false since we are assigning color
+        viewer = napari.view_image(image, name='data.coins', rgb=False)
+        
+        # add the labels
+        label_layer = viewer.add_labels(label_image, name='color labels')
+        napari.run()
+      </code></pre>
+    </p>
+  </p>
+  <p>
+    In this code we have imported threshold_otsu, remove_small_objects and clear_border,label.
+    <ul>
+    <li><code>threshold_otsu</code> splits the image into a binary one. This is used to create a threshold or a distinguisher in the image.</li>
+    <li><code>remove_small_objects</code>helps to filter out small objects. Here it is filtering around the border using the <code>clear_border</code>. We can also give it and argument above which size should it filter out</li>
+    <li>After creating a filter , we have removed small objects. </li>
+    <li><code>label</code> assigns a number to each coin</li>
+    <li>We are finally adding the image and the labels layer ,which colorizes the integer given by label</li>
+    </ul>
+    Code from: <a href>https://napari.org/stable/gallery/add_labels.html#sphx-glr-gallery-add-labels-py</a>
+  </p>
+  <p><h4>Results</h4>
+  <img src="./static/images/Result-2.png">
+  <img src="./static/images/Result.png"></p>
   <h2>Use Cases</h2>
 1. Bioimaging & Microscopy
 Napari is widely used in cell segmentation, fluorescence imaging which includes applying colormaps to say track the movement of nuclei of cells and highlight using labels which cells are of interest. Time-based movement of cells can also be captured.
@@ -639,10 +683,7 @@ Annotations like points or shapes can be used.<br>
   Using ImageJ with napari: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10591722/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10591722/</a>
   <br>Use cases listed on website:<a href="https://napari.imagej.net/en/latest/Use_Cases.html">https://napari.imagej.net/en/latest/Use_Cases.html</a>
   <br>Video on using napari : <a href="https://youtu.be/VXdFOcBCto4?si=njwj8s2G16lvfs_v">https://youtu.be/VXdFOcBCto4?si=njwj8s2G16lvfs_v</a>
-  <br>Official Napari Github: <a href="https://github.com/napari/napari">https://github.com/napari/napari</a></p> 
-  <br>Article by one of the contributors: <a href="https://ilovesymposia.com/2019/10/24/introducing-napari-a-fast-n-dimensional-image-viewer-in-python/">https://ilovesymposia.com/2019/10/24/introducing-napari-a-fast-n-dimensional-image-viewer-in-python/</a>
-
-
+  <br>Official Napari Github: <a href="https://github.com/napari/napari">https://github.com/napari/napari</a></p>
   <p>
   <h4>References:</h4>
   The Video on Napari mentioned above.
